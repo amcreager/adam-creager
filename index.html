@@ -187,62 +187,88 @@
       color: rgba(122,181,168,0.5);
     }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
+
+    /* ── INDUSTRY MARQUEE ────────────────────── */
+    .industry-marquee {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 7px;
-      color: rgba(93,202,165,0.35);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      z-index: 2;
-      animation: fadeUp 0.6s 0.6s ease both;
-    }
-
-    .hero-scroll svg { animation: scrollBounce 1.9s ease-in-out infinite; }
-
-    @keyframes scrollBounce {
-      0%, 100% { transform: translateY(0); opacity: 0.35; }
-      50%       { transform: translateY(6px); opacity: 0.7; }
-    }
-
-    /* ── MARQUEE STRIP ────────────────────────── */
-    .marquee-strip {
-      background: var(--deep-teal);
-      padding: 14px 0;
+      margin-top: 44px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--paper-alt);
       overflow: hidden;
-      border-top: 1px solid rgba(93,202,165,0.07);
-      border-bottom: 1px solid rgba(93,202,165,0.07);
+      gap: 0;
     }
 
-    .marquee-track {
+    .marquee-label {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      flex-shrink: 0;
+      padding-right: 28px;
+      border-right: 1px solid var(--paper-alt);
+      margin-right: 0;
+    }
+
+    .marquee-label-num {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--forest);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .marquee-label-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .marquee-fade-left {
+      width: 48px;
+      flex-shrink: 0;
+      background: linear-gradient(to right, var(--paper), transparent);
+      position: relative;
+      z-index: 1;
+      align-self: stretch;
+    }
+
+    .marquee-track-wrap {
+      flex: 1;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+
+    .ind-track {
       display: flex;
       white-space: nowrap;
-      animation: marqueeScroll 34s linear infinite;
+      animation: indScroll 60s linear infinite;
+      width: max-content;
     }
 
-    .marquee-item {
-      font-size: 10px;
+    .ind-track:hover { animation-play-state: paused; }
+
+    .ind-item {
+      font-size: 12.5px;
       font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(122,181,168,0.5);
-      padding: 0 20px;
-      flex-shrink: 0;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      padding: 0 6px;
     }
 
-    .marquee-sep {
-      color: rgba(93,202,165,0.25);
-      flex-shrink: 0;
-      font-size: 10px;
+    .ind-sep {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 0 4px;
+      opacity: 0.5;
     }
 
-    @keyframes marqueeScroll {
+    @keyframes indScroll {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
@@ -251,6 +277,18 @@
     .section {
       padding: 88px 48px;
       border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    /* Subtle gradient bleed on light sections that follow dark ones */
+    #problems::before,
+    #process::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(0,52,46,0.04), transparent);
+      pointer-events: none;
     }
 
     /* ── SCROLL REVEAL ────────────────────────── */
@@ -303,12 +341,14 @@
     .problem-card {
       background: var(--paper);
       padding: 28px 24px;
-      transition: background 0.15s, box-shadow 0.15s;
+      border-left: 3px solid transparent;
+      transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
     }
 
     .problem-card:hover {
       background: var(--paper-alt);
-      box-shadow: inset 3px 0 0 var(--forest);
+      border-left-color: var(--forest);
+      box-shadow: 0 2px 16px rgba(15,110,86,0.06);
     }
 
     .problem-card-num {
@@ -319,6 +359,11 @@
       line-height: 1;
       margin-bottom: 6px;
       letter-spacing: -0.03em;
+      transition: color 0.18s;
+    }
+
+    .problem-card:hover .problem-card-num {
+      color: rgba(15,110,86,0.28);
     }
 
     .problem-card h3 {
@@ -382,16 +427,17 @@
     }
 
     .work-body {
-      font-size: 13px;
+      font-size: 14px;
       color: #6b6760;
-      line-height: 1.8;
+      line-height: 1.85;
       font-weight: 300;
     }
 
     .work-outcome {
-      padding: 16px 18px;
+      padding: 20px 20px;
       background: var(--deep-teal);
       border-radius: 8px;
+      border-top: 2px solid var(--signal);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -401,19 +447,20 @@
     .work-outcome strong {
       display: block;
       font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--signal);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .work-outcome span {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--off-white);
-      line-height: 1.65;
+      line-height: 1.7;
       font-weight: 300;
     }
+
 
     /* ── SIGNAL FLOW ──────────────────────────── */
     .signal-section {
@@ -522,64 +569,128 @@
       padding-top: 6px;
     }
 
-    .process-steps { display: flex; flex-direction: column; position: relative; }
-
-    /* Vertical connector line through step badges */
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      left: 17px;
-      top: 42px;
-      bottom: 42px;
-      width: 1px;
-      background: rgba(15,110,86,0.2);
-      pointer-events: none;
-    }
-
-    .process-step {
+    /* Interactive stepper */
+    .process-interactive {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      padding: 24px 0;
-      border-top: 1px solid var(--rule);
-      align-items: start;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    .process-step:last-child { border-bottom: 1px solid var(--rule); }
+    .process-tabs {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--rule);
+    }
 
-    .step-left { display: flex; gap: 16px; align-items: flex-start; }
+    .process-tab {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 24px;
+      border: none;
+      border-bottom: 1px solid var(--rule);
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      position: relative;
+      transition: background 0.18s;
+    }
 
-    .step-badge {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+    .process-tab:last-child { border-bottom: none; }
+
+    .process-tab::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
       background: var(--forest);
-      color: #fff;
-      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.18s;
+    }
+
+    .process-tab.active { background: var(--paper-alt); }
+    .process-tab.active::before { opacity: 1; }
+    .process-tab:hover:not(.active) { background: rgba(15,110,86,0.04); }
+
+    .tab-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(15,110,86,0.1);
+      color: var(--forest);
+      font-size: 11px;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      position: relative;
-      z-index: 1;
+      transition: background 0.18s, color 0.18s;
     }
 
-    .step-label {
-      font-size: 14px;
+    .process-tab.active .tab-badge { background: var(--forest); color: #fff; }
+
+    .tab-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #8a8680;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      transition: color 0.18s;
+    }
+
+    .process-tab.active .tab-label { color: var(--ink); }
+
+    .process-panel {
+      padding: 44px 40px;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+    }
+
+    .process-content { display: none; }
+
+    .process-content.active {
+      display: block;
+      animation: panelFadeIn 0.3s ease both;
+    }
+
+    @keyframes panelFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .panel-num {
+      font-family: var(--serif);
+      font-size: 64px;
+      font-weight: 400;
+      color: rgba(15,110,86,0.12);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .panel-title {
+      font-size: 20px;
       font-weight: 600;
       color: var(--ink);
-      letter-spacing: -0.01em;
-      line-height: 1.4;
-      padding-top: 8px;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 16px;
     }
 
-    .step-body {
-      font-size: 13px;
+    .panel-body {
+      font-size: 14px;
       color: #6b6760;
-      line-height: 1.8;
+      line-height: 1.85;
       font-weight: 300;
-      padding-top: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .process-interactive { grid-template-columns: 1fr; }
+      .process-tabs { border-right: none; border-bottom: 1px solid var(--rule); }
+      .process-panel { padding: 32px 24px; min-height: auto; }
     }
 
     /* ── ABOUT ────────────────────────────────── */
@@ -609,43 +720,36 @@
       z-index: 1;
     }
 
-    .about-photo-col { display: flex; flex-direction: column; gap: 16px; }
+    .about-photo-col { display: flex; flex-direction: column; gap: 14px; }
 
-    .headshot-placeholder {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: rgba(255,255,255,0.03);
-      border: 1px dashed rgba(93,202,165,0.2);
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: rgba(122,181,168,0.35);
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .headshot-placeholder svg { width: 36px; height: 36px; }
-
-    /* When ready: <img src="headshot.jpg" alt="Adam Creager" class="headshot-img"> */
     .headshot-img {
       width: 100%;
-      aspect-ratio: 3/4;
+      aspect-ratio: 4/5;
       object-fit: cover;
+      object-position: center top;
       border-radius: 10px;
       display: block;
     }
 
-    .about-creds { display: flex; flex-direction: column; gap: 8px; }
+    .about-creds {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .about-creds-row {
+      grid-column: 1 / -1;
+      margin-top: 0;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
 
     .cred-item {
-      padding: 12px 14px;
+      padding: 16px 16px;
       background: rgba(255,255,255,0.035);
       border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 7px;
+      border-radius: 8px;
     }
 
     .cred-item strong {
@@ -655,21 +759,23 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--signal);
-      margin-bottom: 4px;
+      margin-bottom: 8px;
     }
 
-    .cred-item p { font-size: 12px; color: var(--muted-teal); line-height: 1.55; font-weight: 300; }
+    .cred-item p { font-size: 12px; color: var(--muted-teal); line-height: 1.65; font-weight: 300; }
 
     .about-pull {
       font-family: var(--serif);
-      font-size: 34px;
+      font-size: 36px;
       font-weight: 400;
       font-style: italic;
-      line-height: 1.3;
-      letter-spacing: -0.02em;
+      line-height: 1.28;
+      letter-spacing: -0.025em;
       color: var(--off-white);
       margin-bottom: 28px;
       padding-bottom: 28px;
+      padding-left: 20px;
+      border-left: 3px solid var(--signal);
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
@@ -680,6 +786,30 @@
     .contact-section {
       padding: 88px 48px;
       background: var(--paper-alt);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      right: -120px;
+      top: -120px;
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle at center, rgba(15,110,86,0.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .contact-section::after {
+      content: '';
+      position: absolute;
+      left: -80px;
+      bottom: -80px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle at center, rgba(93,202,165,0.05) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .contact-inner {
@@ -689,6 +819,8 @@
       align-items: start;
       max-width: 1140px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .contact-heading {
@@ -767,8 +899,6 @@
       .problems-grid { grid-template-columns: 1fr 1fr; }
       .work-item { grid-template-columns: 1fr; gap: 14px; }
       .process-lede { grid-template-columns: 1fr; gap: 16px; }
-      .process-step { grid-template-columns: 1fr; gap: 8px; }
-      .process-steps::before { display: none; }
       .about-grid { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; gap: 36px; }
       .signal-lede { grid-template-columns: 1fr; gap: 16px; }
@@ -778,8 +908,7 @@
       nav { padding: 14px 24px; }
       .hero { padding: 64px 24px 72px; }
       .hero-headline { font-size: 38px; }
-      .hero-scroll { display: none; }
-      .section { padding: 60px 24px; }
+.section { padding: 60px 24px; }
       .signal-section { padding: 64px 24px; }
       .contact-section { padding: 60px 24px; }
       .problems-grid { grid-template-columns: 1fr; }
@@ -818,48 +947,8 @@
         </div>
       </div>
     </div>
-    <div class="hero-scroll">
-      <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="1" y="1" width="12" height="18" rx="6" stroke="currentColor" stroke-width="1.5"/>
-        <circle cx="7" cy="6" r="2" fill="currentColor"/>
-      </svg>
-    </div>
   </section>
 
-  <!-- ── MARQUEE STRIP ──────────────────────────── -->
-  <div class="marquee-strip" aria-hidden="true">
-    <div class="marquee-track">
-      <span class="marquee-item">6+ Years Experience</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">12+ Industries</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Full-Funnel Attribution</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Revenue-Connected Reporting</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Paid Media</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Organic SEO</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Email Marketing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">SaaS</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Men's Health</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">HVAC</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Legal</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">E-Commerce</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Financial Services</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Manufacturing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <!-- Duplicate set for seamless loop -->
-      <span class="marquee-item">6+ Years Experience</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">12+ Industries</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Full-Funnel Attribution</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Revenue-Connected Reporting</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Paid Media</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Organic SEO</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Email Marketing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">SaaS</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Men's Health</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">HVAC</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Legal</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">E-Commerce</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Financial Services</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-      <span class="marquee-item">Manufacturing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
-    </div>
-  </div>
 
   <!-- ── PROBLEMS + WORK ────────────────────────── -->
   <section class="section" id="problems">
@@ -869,6 +958,47 @@
         <div class="problems-body">
           <p>Most marketing dysfunction isn't a channel problem. It's a visibility problem. Spend exists, activity exists, but the connection between the two and actual revenue doesn't.</p>
           <p>I've worked across men's health, home services, legal, manufacturing, SaaS, financial services, e-commerce, and more. Different industries, same broken patterns underneath.</p>
+        </div>
+      </div>
+
+      <!-- Industry marquee -->
+      <div class="industry-marquee reveal" aria-label="Industries served">
+        <div class="marquee-label">
+          <span class="marquee-label-num">10+</span>
+          <span class="marquee-label-text">industries</span>
+        </div>
+        <div class="marquee-track-wrap">
+          <div class="ind-track">
+            <span class="ind-item">Men's Health</span><span class="ind-sep">·</span>
+            <span class="ind-item">Home Services</span><span class="ind-sep">·</span>
+            <span class="ind-item">Legal</span><span class="ind-sep">·</span>
+            <span class="ind-item">Manufacturing</span><span class="ind-sep">·</span>
+            <span class="ind-item">Staffing</span><span class="ind-sep">·</span>
+            <span class="ind-item">Logistics</span><span class="ind-sep">·</span>
+            <span class="ind-item">E-Commerce</span><span class="ind-sep">·</span>
+            <span class="ind-item">Education</span><span class="ind-sep">·</span>
+            <span class="ind-item">Financial Services</span><span class="ind-sep">·</span>
+            <span class="ind-item">Healthcare / Medtech</span><span class="ind-sep">·</span>
+            <span class="ind-item">SaaS</span><span class="ind-sep">·</span>
+            <span class="ind-item">Cybersecurity</span><span class="ind-sep">·</span>
+            <span class="ind-item">Food / CPG</span><span class="ind-sep">·</span>
+            <span class="ind-item">B2B Tech</span><span class="ind-sep">·</span>
+            <!-- duplicate for seamless loop -->
+            <span class="ind-item">Men's Health</span><span class="ind-sep">·</span>
+            <span class="ind-item">Home Services</span><span class="ind-sep">·</span>
+            <span class="ind-item">Legal</span><span class="ind-sep">·</span>
+            <span class="ind-item">Manufacturing</span><span class="ind-sep">·</span>
+            <span class="ind-item">Staffing</span><span class="ind-sep">·</span>
+            <span class="ind-item">Logistics</span><span class="ind-sep">·</span>
+            <span class="ind-item">E-Commerce</span><span class="ind-sep">·</span>
+            <span class="ind-item">Education</span><span class="ind-sep">·</span>
+            <span class="ind-item">Financial Services</span><span class="ind-sep">·</span>
+            <span class="ind-item">Healthcare / Medtech</span><span class="ind-sep">·</span>
+            <span class="ind-item">SaaS</span><span class="ind-sep">·</span>
+            <span class="ind-item">Cybersecurity</span><span class="ind-sep">·</span>
+            <span class="ind-item">Food / CPG</span><span class="ind-sep">·</span>
+            <span class="ind-item">B2B Tech</span><span class="ind-sep">·</span>
+          </div>
         </div>
       </div>
 
@@ -912,10 +1042,10 @@
             <span class="work-tag">Attribution</span>
             <p class="work-title">End-to-end revenue attribution across four disconnected systems</p>
           </div>
-          <p class="work-body">A client in the health services space needed to know which campaigns were producing revenue, not just calls. Data was fragmented across Google Ads, CallRail, a manual appointment spreadsheet, and a CRM with no attribution preservation. I built a tracking structure using 20+ unique call tracking numbers mapped to individual ad groups, then matched caller records to appointment logs and CRM exports to connect each funnel stage.</p>
+          <p class="work-body">The client had no attribution connecting ad spend to revenue — call data in Google Ads and CallRail, appointments tracked manually in a spreadsheet, revenue in a CRM that preserved none of it. I built a tracking structure using 20+ unique CallRail numbers, each mapped to a specific platform, campaign, and ad group. From there I matched caller records to appointment logs and layered in CRM exports to produce ad-group-level ROAS across the full funnel. That visibility didn't exist before, and it changed how every budget decision was made.</p>
           <div class="work-outcome">
             <strong>Outcome</strong>
-            <span>Ad-group level visibility into cost per call, cost per scheduled appointment, cost per attended appointment, and revenue. Built from scratch across systems that were never designed to talk to each other.</span>
+            <span>Ad-group level cost per call, cost per scheduled appointment, cost per attended appointment, and ROAS — built from scratch across systems that were never designed to talk to each other.</span>
           </div>
         </div>
         <div class="work-item reveal" style="transition-delay:0.07s">
@@ -923,10 +1053,10 @@
             <span class="work-tag">Reporting</span>
             <p class="work-title">Centralized reporting infrastructure across a full client portfolio</p>
           </div>
-          <p class="work-body">Monthly reporting was being rebuilt manually each cycle — 8 to 10 hours per client, inconsistent, error-prone. I designed a centralized infrastructure that standardized data pulls, removed manual handoffs, and made the process repeatable across accounts regardless of industry or channel mix.</p>
+          <p class="work-body">Reporting was being rebuilt manually every month — 8 to 10 hours per client — and it was only measuring site-wide metrics, not the specific pages we'd implemented. If a piece of content wasn't producing six months later, there was no consistent process to catch it. I built a connected system where Google Analytics, Search Console, and SEMrush each fed into their own linked sheet, rolling up into a master doc with auto-generated monthly tabs. For the first time we could pull any implemented URL and see exactly how it was performing, which created a feedback loop we hadn't had before.</p>
           <div class="work-outcome">
             <strong>Outcome</strong>
-            <span>Dashboard setup cut from 8–10 hours to minutes. Ongoing maintenance reduced by 80%.</span>
+            <span>Setup time dropped from 8–10 hours to minutes. Shifted from site-wide reporting to page-level visibility — making it possible to identify and act on underperforming content months after implementation.</span>
           </div>
         </div>
         <div class="work-item reveal" style="transition-delay:0.14s">
@@ -934,10 +1064,10 @@
             <span class="work-tag">Budget controls</span>
             <p class="work-title">Pacing controls that eliminated recurring paid media overspend</p>
           </div>
-          <p class="work-body">Paid media overspend was recurring across several accounts. Pacing monitored inconsistently, corrective action always after the fact. I built pacing controls that surfaced variance early in the cycle and created a review cadence that kept spend accountable to plan without daily manual checks.</p>
+          <p class="work-body">Paid media accounts were consistently overspending because budgets weren't centralized and monitoring was manual and reactive — by the time anyone noticed, the damage was done. I built a system that auto-pulled daily spend from each platform, consolidated all client budgets in one place, and added pacing logic so over- or underspend risk was visible at a glance. Early on it meant catching problems earlier in the cycle. Over time, as the process became embedded, recurring overspend stopped happening entirely.</p>
           <div class="work-outcome">
             <strong>Outcome</strong>
-            <span>Recurring overspend eliminated. Mid-cycle reallocation became a strategic decision, not a damage-control measure.</span>
+            <span>Recurring overspend eliminated. Mid-cycle reallocation shifted from damage control to a strategic decision — identifying where to tighten underspend and reallocate more effectively.</span>
           </div>
         </div>
       </div>
@@ -1031,34 +1161,46 @@
         <h2 class="process-heading">How I approach a problem before I start working on it.</h2>
         <p class="process-intro">Most marketing problems aren't what they look like on the surface. A declining conversion rate might be a tracking issue, a messaging issue, a landing page issue, or a lead quality issue. Same symptom, four different root causes, four different fixes.</p>
       </div>
-      <div class="process-steps">
-        <div class="process-step reveal" style="transition-delay:0.05s">
-          <div class="step-left">
-            <span class="step-badge">1</span>
-            <span class="step-label">Diagnose before prescribing</span>
-          </div>
-          <span class="step-body">I don't start with channel recommendations or campaign ideas. I start with the funnel: where is volume dropping, where is efficiency breaking down, and what data exists to confirm it. A solution applied to the wrong problem is just a more expensive way to stay stuck.</span>
+      <div class="process-interactive reveal">
+        <div class="process-tabs">
+          <button class="process-tab active" data-step="1">
+            <span class="tab-badge">1</span>
+            <span class="tab-label">Diagnose before prescribing</span>
+          </button>
+          <button class="process-tab" data-step="2">
+            <span class="tab-badge">2</span>
+            <span class="tab-label">Working is not the same as optimized</span>
+          </button>
+          <button class="process-tab" data-step="3">
+            <span class="tab-badge">3</span>
+            <span class="tab-label">Build visibility before making moves</span>
+          </button>
+          <button class="process-tab" data-step="4">
+            <span class="tab-badge">4</span>
+            <span class="tab-label">Make the system repeatable, then question it</span>
+          </button>
         </div>
-        <div class="process-step reveal" style="transition-delay:0.1s">
-          <div class="step-left">
-            <span class="step-badge">2</span>
-            <span class="step-label">Working is not the same as optimized</span>
+        <div class="process-panel">
+          <div class="process-content active" data-step="1">
+            <p class="panel-num">01</p>
+            <h3 class="panel-title">Diagnose before prescribing</h3>
+            <p class="panel-body">I don't start with channel recommendations or campaign ideas. I start with the funnel: where is volume dropping, where is efficiency breaking down, and what data exists to confirm it. A solution applied to the wrong problem is just a more expensive way to stay stuck.</p>
           </div>
-          <span class="step-body">Performance erodes before it looks broken. Customer behavior changes, channels saturate, and last year's process may be hiding inefficiencies that only show up when you look. My default is to question what's working before waiting for it to stop.</span>
-        </div>
-        <div class="process-step reveal" style="transition-delay:0.15s">
-          <div class="step-left">
-            <span class="step-badge">3</span>
-            <span class="step-label">Build visibility before making moves</span>
+          <div class="process-content" data-step="2">
+            <p class="panel-num">02</p>
+            <h3 class="panel-title">Working is not the same as optimized</h3>
+            <p class="panel-body">Performance erodes before it looks broken. Customer behavior changes, channels saturate, and last year's process may be hiding inefficiencies that only show up when you look. My default is to question what's working before waiting for it to stop.</p>
           </div>
-          <span class="step-body">Budget shifts, channel pivots, and messaging changes are easier to get right when you can see the full picture. I build reporting and process infrastructure first, so decisions have a foundation. Moving fast without visibility isn't execution efficiency, it's risk amplification.</span>
-        </div>
-        <div class="process-step reveal" style="transition-delay:0.2s">
-          <div class="step-left">
-            <span class="step-badge">4</span>
-            <span class="step-label">Make the system repeatable, then question it</span>
+          <div class="process-content" data-step="3">
+            <p class="panel-num">03</p>
+            <h3 class="panel-title">Build visibility before making moves</h3>
+            <p class="panel-body">Budget shifts, channel pivots, and messaging changes are easier to get right when you can see the full picture. I build reporting and process infrastructure first, so decisions have a foundation. Moving fast without visibility isn't execution efficiency, it's risk amplification.</p>
           </div>
-          <span class="step-body">A good process run once is an experiment. Run consistently, it's infrastructure. I build toward repeatability so results are comparable over time. Then I treat that system as a standing hypothesis, not a permanent answer. There is no finished marketing system, only one that hasn't been re-evaluated recently.</span>
+          <div class="process-content" data-step="4">
+            <p class="panel-num">04</p>
+            <h3 class="panel-title">Make the system repeatable, then question it</h3>
+            <p class="panel-body">A good process run once is an experiment. Run consistently, it's infrastructure. I build toward repeatability so results are comparable over time. Then I treat that system as a standing hypothesis, not a permanent answer. There is no finished marketing system, only one that hasn't been re-evaluated recently.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1069,30 +1211,24 @@
     <div class="wrap">
       <div class="about-grid">
         <div class="about-photo-col">
-          <div class="headshot-placeholder">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="2"/>
-              <path d="M6 44c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span>Photo coming soon</span>
-          </div>
-          <div class="about-creds">
-            <div class="cred-item">
-              <strong>Experience</strong>
-              <p>Senior Client Success Executive, Big Leap (2021–2026). Prior: Boostability, DigiCert.</p>
-            </div>
-            <div class="cred-item">
-              <strong>Education</strong>
-              <p>MBA, Southern Utah University. B.S. Marketing, Utah Valley University.</p>
-            </div>
-          </div>
+          <img src="headshot.jpg" alt="Adam Creager" class="headshot-img" />
         </div>
         <div class="about-copy-col reveal">
           <p class="about-pull">6+ years as a fractional marketing lead across more industries than most marketers see in a full career.</p>
           <div class="about-body">
             <p>At Big Leap, I owned full-funnel performance across a rotating portfolio of growth-stage clients: men's health, HVAC, legal, SaaS, financial services, e-commerce, medtech, manufacturing, staffing, and more. Each one was a different demand model, a different conversion architecture, a different set of constraints.</p>
             <p>That breadth is a specific kind of training. You develop pattern recognition across models, not just depth in one vertical. You learn to spot where a funnel breaks not because you've seen this exact business before, but because you've seen this exact failure mode in four other contexts.</p>
-            <p>I operate independently, make decisions with revenue consequences in mind rather than channel metrics, and build the process infrastructure that makes execution repeatable. Available for full-time roles and fractional engagements.</p>
+            <p>I operate independently, make decisions with revenue consequences in mind rather than channel metrics, and build the process infrastructure that makes execution repeatable.</p>
+          </div>
+        </div>
+        <div class="about-creds about-creds-row reveal">
+          <div class="cred-item">
+            <strong>Experience</strong>
+            <p>Senior Client Success Executive, Big Leap (2021–2026).<br>Prior: Boostability, DigiCert.</p>
+          </div>
+          <div class="cred-item">
+            <strong>Education</strong>
+            <p>MBA, Southern Utah University.<br>B.S. Marketing, Utah Valley University.</p>
           </div>
         </div>
       </div>
@@ -1108,14 +1244,14 @@
       </div>
       <div class="contact-links reveal" style="transition-delay:0.1s">
         <a href="mailto:amcreager1812@gmail.com" class="contact-cta">
-          <span>amcreager1812@gmail.com</span>
+          <span>Let's Connect</span>
           <span class="arrow">↗</span>
         </a>
         <a href="https://www.linkedin.com/in/adamcreager" target="_blank" class="contact-link">
           <span>LinkedIn</span>
           <span class="arrow">↗</span>
         </a>
-        <a href="#" class="contact-link">
+        <a href="Adam Creager - Resume.pdf" download class="contact-link">
           <span>Download resume</span>
           <span class="arrow">↗</span>
         </a>
@@ -1129,6 +1265,17 @@
   </footer>
 
   <script>
+    // Process stepper
+    document.querySelectorAll('.process-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var step = tab.dataset.step;
+        document.querySelectorAll('.process-tab').forEach(function (t) { t.classList.remove('active'); });
+        document.querySelectorAll('.process-content').forEach(function (c) { c.classList.remove('active'); });
+        tab.classList.add('active');
+        document.querySelector('.process-content[data-step="' + step + '"]').classList.add('active');
+      });
+    });
+
     (function () {
       var els = document.querySelectorAll('.reveal');
       if (!('IntersectionObserver' in window)) {

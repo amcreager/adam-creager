@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adam Creager — Performance & Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep-teal:   #0A1F1C;
+      --forest:      #0F6E56;
+      --mid-teal:    #2E7D6E;
+      --signal:      #5DCAA5;
+      --off-white:   #E8F4F1;
+      --muted-teal:  #7AB5A8;
+      --ink:         #0f0f0e;
+      --paper:       #F7F5F0;
+      --paper-alt:   #EFECE5;
+      --rule:        rgba(15,15,14,0.09);
+      --rule-light:  rgba(255,255,255,0.1);
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* GLOBAL WRAP */
+    .wrap { max-width: 1140px; margin: 0 auto; }
+
+    /* ── NAV ──────────────────────────────────── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: var(--deep-teal);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo-mark { width: 28px; height: 18px; flex-shrink: 0; }
+
+    .nav-name {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--off-white);
+    }
+
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 7px 20px;
+      border: 1px solid rgba(93,202,165,0.35);
+      border-radius: 6px;
+      color: var(--signal);
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .nav-cta:hover { background: rgba(93,202,165,0.08); border-color: var(--signal); }
+
+    /* ── HERO ─────────────────────────────────── */
+    .hero {
+      background: var(--deep-teal);
+      padding: 100px 48px 108px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(93,202,165,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(93,202,165,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -140px;
+      left: -60px;
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, rgba(15,110,86,0.28) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 1140px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--signal);
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: 76px;
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: var(--off-white);
+      max-width: 860px;
+      animation: fadeUp 0.6s 0.15s ease both;
+    }
+
+    .hero-headline em { font-style: italic; color: var(--signal); }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--rule-light);
+      align-items: end;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted-teal);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .hero-quote-block {
+      border-left: 2px solid var(--forest);
+      padding-left: 20px;
+    }
+
+    .hero-quote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.65;
+      color: rgba(232,244,241,0.6);
+      margin-bottom: 8px;
+    }
+
+    .hero-quote-attr {
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(122,181,168,0.5);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      color: rgba(93,202,165,0.35);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      z-index: 2;
+      animation: fadeUp 0.6s 0.6s ease both;
+    }
+
+    .hero-scroll svg { animation: scrollBounce 1.9s ease-in-out infinite; }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.35; }
+      50%       { transform: translateY(6px); opacity: 0.7; }
+    }
+
+    /* ── MARQUEE STRIP ────────────────────────── */
+    .marquee-strip {
+      background: var(--deep-teal);
+      padding: 14px 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(93,202,165,0.07);
+      border-bottom: 1px solid rgba(93,202,165,0.07);
+    }
+
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marqueeScroll 34s linear infinite;
+    }
+
+    .marquee-item {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(122,181,168,0.5);
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+
+    .marquee-sep {
+      color: rgba(93,202,165,0.25);
+      flex-shrink: 0;
+      font-size: 10px;
+    }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION SHELL ────────────────────────── */
+    .section {
+      padding: 88px 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* ── SCROLL REVEAL ────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── PROBLEMS ─────────────────────────────── */
+    .problems-lede {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+
+    .problems-heading {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .problems-body {
+      font-size: 14px;
+      color: #6b6760;
+      line-height: 1.85;
+      font-weight: 300;
+      padding-top: 6px;
+    }
+
+    .problems-body p + p { margin-top: 14px; }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 72px;
+    }
+
+    .problem-card {
+      background: var(--paper);
+      padding: 28px 24px;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+
+    .problem-card:hover {
+      background: var(--paper-alt);
+      box-shadow: inset 3px 0 0 var(--forest);
+    }
+
+    .problem-card-num {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 400;
+      color: rgba(15,110,86,0.14);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
+    }
+
+    .problem-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 9px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .problem-card p {
+      font-size: 12px;
+      color: #7a7570;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── WORK ─────────────────────────────────── */
+    .work-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b5b0a8;
+      margin-bottom: 16px;
+    }
+
+    .work-list { display: flex; flex-direction: column; }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 150px 1fr 200px;
+      gap: 28px;
+      padding: 32px 0;
+      border-top: 1px solid var(--rule);
+      align-items: center;
+    }
+
+    .work-item:last-child { border-bottom: 1px solid var(--rule); }
+
+    .work-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: rgba(15,110,86,0.08);
+      padding: 3px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 7px;
+    }
+
+    .work-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+
+    .work-body {
+      font-size: 13px;
+      color: #6b6760;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .work-outcome {
+      padding: 16px 18px;
+      background: var(--deep-teal);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: stretch;
+    }
+
+    .work-outcome strong {
+      display: block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin-bottom: 8px;
+    }
+
+    .work-outcome span {
+      font-size: 12px;
+      color: var(--off-white);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ── SIGNAL FLOW ──────────────────────────── */
+    .signal-section {
+      background: var(--deep-teal);
+      padding: 100px 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signal-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(93,202,165,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(93,202,165,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .signal-inner { position: relative; z-index: 1; max-width: 1140px; }
+
+    .signal-lede {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 48px;
+      margin-bottom: 60px;
+      align-items: end;
+    }
+
+    .signal-heading {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+    }
+
+    .signal-desc {
+      font-size: 14px;
+      color: var(--muted-teal);
+      line-height: 1.85;
+      font-weight: 300;
+      padding-top: 4px;
+    }
+
+    .signal-diagram { width: 100%; height: 280px; position: relative; }
+    .signal-diagram svg { width: 100%; height: 100%; overflow: visible; }
+
+    @keyframes nodePulse {
+      0%, 100% { r: 28; opacity: 1; }
+      50%       { r: 32; opacity: 0.7; }
+    }
+
+    @keyframes flowDash {
+      from { stroke-dashoffset: 200; }
+      to   { stroke-dashoffset: 0; }
+    }
+
+    @keyframes outputGlow {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+
+    @keyframes ringExpand {
+      0%   { transform: scale(1); opacity: 0.45; }
+      100% { transform: scale(1.95); opacity: 0; }
+    }
+
+    .node-pulse  { animation: nodePulse 2.8s ease-in-out infinite; }
+    .flow-line   { stroke-dasharray: 6 4; animation: flowDash 2.2s linear infinite; }
+    .output-glow { animation: outputGlow 2.4s ease-in-out infinite; }
+
+    .pulse-ring {
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      animation: ringExpand 2.8s ease-out infinite;
+    }
+
+    /* ── PROCESS ──────────────────────────────── */
+    .process-section { background: var(--paper-alt); }
+
+    .process-lede {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 40px;
+    }
+
+    .process-heading {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .process-intro {
+      font-size: 14px;
+      color: #6b6760;
+      line-height: 1.85;
+      font-weight: 300;
+      padding-top: 6px;
+    }
+
+    .process-steps { display: flex; flex-direction: column; position: relative; }
+
+    /* Vertical connector line through step badges */
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 42px;
+      bottom: 42px;
+      width: 1px;
+      background: rgba(15,110,86,0.2);
+      pointer-events: none;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid var(--rule);
+      align-items: start;
+    }
+
+    .process-step:last-child { border-bottom: 1px solid var(--rule); }
+
+    .step-left { display: flex; gap: 16px; align-items: flex-start; }
+
+    .step-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      padding-top: 8px;
+    }
+
+    .step-body {
+      font-size: 13px;
+      color: #6b6760;
+      line-height: 1.8;
+      font-weight: 300;
+      padding-top: 8px;
+    }
+
+    /* ── ABOUT ────────────────────────────────── */
+    .about-section {
+      background: var(--deep-teal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-section::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(15,110,86,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 64px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-photo-col { display: flex; flex-direction: column; gap: 16px; }
+
+    .headshot-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(93,202,165,0.2);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: rgba(122,181,168,0.35);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .headshot-placeholder svg { width: 36px; height: 36px; }
+
+    /* When ready: <img src="headshot.jpg" alt="Adam Creager" class="headshot-img"> */
+    .headshot-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .about-creds { display: flex; flex-direction: column; gap: 8px; }
+
+    .cred-item {
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 7px;
+    }
+
+    .cred-item strong {
+      display: block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin-bottom: 4px;
+    }
+
+    .cred-item p { font-size: 12px; color: var(--muted-teal); line-height: 1.55; font-weight: 300; }
+
+    .about-pull {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .about-body { font-size: 14px; color: var(--muted-teal); line-height: 1.9; font-weight: 300; }
+    .about-body p + p { margin-top: 16px; }
+
+    /* ── CONTACT ──────────────────────────────── */
+    .contact-section {
+      padding: 88px 48px;
+      background: var(--paper-alt);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .contact-sub {
+      font-size: 14px;
+      color: #6b6760;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 8px; padding-top: 2px; }
+
+    .contact-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: var(--forest);
+      border-radius: 8px;
+      color: var(--off-white);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+      margin-bottom: 4px;
+    }
+
+    .contact-cta:hover { background: var(--mid-teal); }
+    .contact-cta .arrow { font-size: 14px; opacity: 0.7; }
+
+    .contact-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: 13px;
+      transition: background 0.12s, border-color 0.12s, box-shadow 0.12s;
+    }
+
+    .contact-link:hover {
+      background: var(--paper);
+      border-color: rgba(15,110,86,0.2);
+      box-shadow: inset 3px 0 0 var(--forest);
+    }
+
+    .contact-link .arrow { font-size: 13px; color: #c0bbb4; }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      padding: 20px 48px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p { font-size: 11px; color: #c0bbb4; }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-headline { font-size: 52px; }
+      .hero-split { grid-template-columns: 1fr; gap: 28px; }
+      .problems-lede { grid-template-columns: 1fr; gap: 16px; }
+      .problems-grid { grid-template-columns: 1fr 1fr; }
+      .work-item { grid-template-columns: 1fr; gap: 14px; }
+      .process-lede { grid-template-columns: 1fr; gap: 16px; }
+      .process-step { grid-template-columns: 1fr; gap: 8px; }
+      .process-steps::before { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+      .signal-lede { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 24px; }
+      .hero { padding: 64px 24px 72px; }
+      .hero-headline { font-size: 38px; }
+      .hero-scroll { display: none; }
+      .section { padding: 60px 24px; }
+      .signal-section { padding: 64px 24px; }
+      .contact-section { padding: 60px 24px; }
+      .problems-grid { grid-template-columns: 1fr; }
+      footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <svg class="nav-logo-mark" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="28" x2="56" y2="40" stroke="#5DCAA5" stroke-width="5" stroke-linecap="round"/>
+        <line x1="12" y1="8" x2="56" y2="40" stroke="#2E7D6E" stroke-width="5" stroke-linecap="round"/>
+        <line x1="12" y1="72" x2="56" y2="40" stroke="#2E7D6E" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="64" cy="40" r="18" stroke="#5DCAA5" stroke-width="5"/>
+        <circle cx="64" cy="40" r="6" fill="#5DCAA5"/>
+        <line x1="82" y1="40" x2="108" y2="40" stroke="#5DCAA5" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="114" cy="40" r="6" fill="#5DCAA5"/>
+      </svg>
+      <span class="nav-name">Adam Creager</span>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Growth Marketing · Demand Generation · Performance Systems</p>
+      <h1 class="hero-headline">Marketing that connects<br>to revenue, <em>not just metrics.</em></h1>
+      <div class="hero-split">
+        <p class="hero-sub">6+ years owning full-funnel performance across a portfolio of growth-stage businesses. I build the reporting infrastructure, process controls, and strategic clarity that make marketing decisions defensible.</p>
+        <div class="hero-quote-block">
+          <p class="hero-quote">"Without data, you're just another person with an opinion."</p>
+          <p class="hero-quote-attr">W. Edwards Deming</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="12" height="18" rx="6" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="7" cy="6" r="2" fill="currentColor"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── MARQUEE STRIP ──────────────────────────── -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">6+ Years Experience</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">12+ Industries</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Full-Funnel Attribution</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Revenue-Connected Reporting</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Paid Media</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Organic SEO</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Email Marketing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">SaaS</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Men's Health</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">HVAC</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Legal</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">E-Commerce</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Financial Services</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Manufacturing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <!-- Duplicate set for seamless loop -->
+      <span class="marquee-item">6+ Years Experience</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">12+ Industries</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Full-Funnel Attribution</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Revenue-Connected Reporting</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Paid Media</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Organic SEO</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Email Marketing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">SaaS</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Men's Health</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">HVAC</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Legal</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">E-Commerce</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Financial Services</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+      <span class="marquee-item">Manufacturing</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ── PROBLEMS + WORK ────────────────────────── -->
+  <section class="section" id="problems">
+    <div class="wrap">
+      <div class="problems-lede reveal">
+        <h2 class="problems-heading">The same patterns show up across every industry.</h2>
+        <div class="problems-body">
+          <p>Most marketing dysfunction isn't a channel problem. It's a visibility problem. Spend exists, activity exists, but the connection between the two and actual revenue doesn't.</p>
+          <p>I've worked across men's health, home services, legal, manufacturing, SaaS, financial services, e-commerce, and more. Different industries, same broken patterns underneath.</p>
+        </div>
+      </div>
+
+      <div class="problems-grid">
+        <div class="problem-card reveal" style="transition-delay:0.05s">
+          <p class="problem-card-num">01</p>
+          <h3>No line of sight from spend to revenue</h3>
+          <p>Ad platforms show cost per click. The CRM shows closed deals. Nothing connects them. Budgets get set on gut feel or blended averages that obscure what's working.</p>
+        </div>
+        <div class="problem-card reveal" style="transition-delay:0.1s">
+          <p class="problem-card-num">02</p>
+          <h3>Reporting that takes hours and says little</h3>
+          <p>Dashboards rebuilt from scratch each month. Manual, inconsistent, error-prone. By the time the report is done, the window to act on it has closed.</p>
+        </div>
+        <div class="problem-card reveal" style="transition-delay:0.15s">
+          <p class="problem-card-num">03</p>
+          <h3>Strategy that stalls without execution clarity</h3>
+          <p>Good ideas sit in decks. Priorities shift without data to anchor them. Teams execute on what's loudest, not what matters to the funnel.</p>
+        </div>
+        <div class="problem-card reveal" style="transition-delay:0.2s">
+          <p class="problem-card-num">04</p>
+          <h3>Channel performance that can't be compared</h3>
+          <p>Paid, organic, and email live in separate tools with different measurement conventions. No shared denominator means reallocation has no real basis.</p>
+        </div>
+        <div class="problem-card reveal" style="transition-delay:0.25s">
+          <p class="problem-card-num">05</p>
+          <h3>Budget decisions made without performance data</h3>
+          <p>Overspend happens because no one catches it in time. Underspend because no one sees where efficiency exists. Both leave revenue on the table.</p>
+        </div>
+        <div class="problem-card reveal" style="transition-delay:0.3s">
+          <p class="problem-card-num">06</p>
+          <h3>Growth that works until suddenly it doesn't</h3>
+          <p>Performance slips long before something looks obviously broken. Optimization requires re-evaluating what's already working, not waiting for a crisis.</p>
+        </div>
+      </div>
+
+      <p class="work-section-label">Selected examples</p>
+      <div class="work-list">
+        <div class="work-item reveal">
+          <div>
+            <span class="work-tag">Attribution</span>
+            <p class="work-title">End-to-end revenue attribution across four disconnected systems</p>
+          </div>
+          <p class="work-body">A client in the health services space needed to know which campaigns were producing revenue, not just calls. Data was fragmented across Google Ads, CallRail, a manual appointment spreadsheet, and a CRM with no attribution preservation. I built a tracking structure using 20+ unique call tracking numbers mapped to individual ad groups, then matched caller records to appointment logs and CRM exports to connect each funnel stage.</p>
+          <div class="work-outcome">
+            <strong>Outcome</strong>
+            <span>Ad-group level visibility into cost per call, cost per scheduled appointment, cost per attended appointment, and revenue. Built from scratch across systems that were never designed to talk to each other.</span>
+          </div>
+        </div>
+        <div class="work-item reveal" style="transition-delay:0.07s">
+          <div>
+            <span class="work-tag">Reporting</span>
+            <p class="work-title">Centralized reporting infrastructure across a full client portfolio</p>
+          </div>
+          <p class="work-body">Monthly reporting was being rebuilt manually each cycle — 8 to 10 hours per client, inconsistent, error-prone. I designed a centralized infrastructure that standardized data pulls, removed manual handoffs, and made the process repeatable across accounts regardless of industry or channel mix.</p>
+          <div class="work-outcome">
+            <strong>Outcome</strong>
+            <span>Dashboard setup cut from 8–10 hours to minutes. Ongoing maintenance reduced by 80%.</span>
+          </div>
+        </div>
+        <div class="work-item reveal" style="transition-delay:0.14s">
+          <div>
+            <span class="work-tag">Budget controls</span>
+            <p class="work-title">Pacing controls that eliminated recurring paid media overspend</p>
+          </div>
+          <p class="work-body">Paid media overspend was recurring across several accounts. Pacing monitored inconsistently, corrective action always after the fact. I built pacing controls that surfaced variance early in the cycle and created a review cadence that kept spend accountable to plan without daily manual checks.</p>
+          <div class="work-outcome">
+            <strong>Outcome</strong>
+            <span>Recurring overspend eliminated. Mid-cycle reallocation became a strategic decision, not a damage-control measure.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SIGNAL DIAGRAM ──────────────────────────── -->
+  <section class="signal-section" id="signal">
+    <div class="signal-inner">
+      <div class="signal-lede reveal">
+        <h2 class="signal-heading">Most teams have data.<br>Few have clarity.</h2>
+        <p class="signal-desc">Fragmented inputs — digital marketing, pipeline activity, revenue outcomes — converted into a single decision. That's the work.</p>
+      </div>
+
+      <div class="signal-diagram">
+        <svg viewBox="0 0 900 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!--
+              gradientUnits="userSpaceOnUse" prevents the degenerate bounding-box
+              problem that silently drops gradients on horizontal <line> elements.
+              Each gradient's x1/y1/x2/y2 matches its line's exact coordinates.
+            -->
+            <linearGradient id="lg1" gradientUnits="userSpaceOnUse" x1="178" y1="43" x2="416" y2="107">
+              <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.85"/>
+            </linearGradient>
+            <linearGradient id="lg2" gradientUnits="userSpaceOnUse" x1="178" y1="120" x2="416" y2="120">
+              <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.85"/>
+            </linearGradient>
+            <linearGradient id="lg3" gradientUnits="userSpaceOnUse" x1="178" y1="197" x2="416" y2="133">
+              <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.75"/>
+            </linearGradient>
+            <linearGradient id="outGrad" gradientUnits="userSpaceOnUse" x1="484" y1="120" x2="700" y2="120">
+              <stop offset="0%" stop-color="#5DCAA5" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.35"/>
+            </linearGradient>
+          </defs>
+
+          <!-- INPUT PILLS -->
+          <rect x="20" y="28" width="158" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
+          <text x="99" y="47" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">DIGITAL MARKETING</text>
+
+          <rect x="20" y="105" width="158" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
+          <text x="99" y="124" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">PIPELINE ACTIVITY</text>
+
+          <rect x="20" y="182" width="158" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
+          <text x="99" y="201" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">REVENUE DATA</text>
+
+          <!-- FLOW LINES: pill right-edge → node ring edge (node cx=450 cy=120 r=34) -->
+          <line class="flow-line" x1="178" y1="43"  x2="416" y2="107" stroke="url(#lg1)" stroke-width="1.8"/>
+          <line class="flow-line" x1="178" y1="120" x2="416" y2="120" stroke="url(#lg2)" stroke-width="1.8" style="animation-delay:0.4s"/>
+          <line class="flow-line" x1="178" y1="197" x2="416" y2="133" stroke="url(#lg3)" stroke-width="1.8" style="animation-delay:0.8s"/>
+
+          <!-- NODE -->
+          <!-- Expanding pulse ring -->
+          <circle cx="450" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="1.2" class="pulse-ring"/>
+          <!-- Outer soft halo -->
+          <circle cx="450" cy="120" r="50" fill="rgba(93,202,165,0.03)" stroke="rgba(93,202,165,0.07)" stroke-width="1"/>
+          <!-- Main ring -->
+          <circle cx="450" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="2.5" filter="url(#glow)" class="node-pulse"/>
+          <!-- Inner dot -->
+          <circle cx="450" cy="120" r="11" fill="#5DCAA5" filter="url(#glow)"/>
+          <!-- Dark center -->
+          <circle cx="450" cy="120" r="5" fill="#0A1F1C"/>
+
+          <!-- OUTPUT LINE + TERMINAL -->
+          <line x1="484" y1="120" x2="700" y2="120" stroke="url(#outGrad)" stroke-width="2.5" stroke-linecap="round" class="output-glow"/>
+          <circle cx="708" cy="120" r="8" fill="#5DCAA5" filter="url(#glow)" class="output-glow"/>
+          <!-- Short connector: terminal dot right-edge → output label left-edge -->
+          <line x1="716" y1="120" x2="730" y2="120" stroke="#5DCAA5" stroke-width="1.5" stroke-opacity="0.4"/>
+
+          <!-- OUTPUT LABEL -->
+          <rect x="730" y="90" width="152" height="60" rx="8" fill="rgba(93,202,165,0.07)" stroke="rgba(93,202,165,0.28)" stroke-width="1.5"/>
+          <text x="806" y="116" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600" fill="#5DCAA5" letter-spacing="0.08em">REVENUE</text>
+          <text x="806" y="134" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600" fill="#5DCAA5" letter-spacing="0.08em">DECISION</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROCESS ──────────────────────────────────── -->
+  <section class="section process-section" id="process">
+    <div class="wrap">
+      <div class="process-lede reveal">
+        <h2 class="process-heading">How I approach a problem before I start working on it.</h2>
+        <p class="process-intro">Most marketing problems aren't what they look like on the surface. A declining conversion rate might be a tracking issue, a messaging issue, a landing page issue, or a lead quality issue. Same symptom, four different root causes, four different fixes.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal" style="transition-delay:0.05s">
+          <div class="step-left">
+            <span class="step-badge">1</span>
+            <span class="step-label">Diagnose before prescribing</span>
+          </div>
+          <span class="step-body">I don't start with channel recommendations or campaign ideas. I start with the funnel: where is volume dropping, where is efficiency breaking down, and what data exists to confirm it. A solution applied to the wrong problem is just a more expensive way to stay stuck.</span>
+        </div>
+        <div class="process-step reveal" style="transition-delay:0.1s">
+          <div class="step-left">
+            <span class="step-badge">2</span>
+            <span class="step-label">Working is not the same as optimized</span>
+          </div>
+          <span class="step-body">Performance erodes before it looks broken. Customer behavior changes, channels saturate, and last year's process may be hiding inefficiencies that only show up when you look. My default is to question what's working before waiting for it to stop.</span>
+        </div>
+        <div class="process-step reveal" style="transition-delay:0.15s">
+          <div class="step-left">
+            <span class="step-badge">3</span>
+            <span class="step-label">Build visibility before making moves</span>
+          </div>
+          <span class="step-body">Budget shifts, channel pivots, and messaging changes are easier to get right when you can see the full picture. I build reporting and process infrastructure first, so decisions have a foundation. Moving fast without visibility isn't execution efficiency, it's risk amplification.</span>
+        </div>
+        <div class="process-step reveal" style="transition-delay:0.2s">
+          <div class="step-left">
+            <span class="step-badge">4</span>
+            <span class="step-label">Make the system repeatable, then question it</span>
+          </div>
+          <span class="step-body">A good process run once is an experiment. Run consistently, it's infrastructure. I build toward repeatability so results are comparable over time. Then I treat that system as a standing hypothesis, not a permanent answer. There is no finished marketing system, only one that hasn't been re-evaluated recently.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ──────────────────────────────────────── -->
+  <section class="section about-section" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-photo-col">
+          <div class="headshot-placeholder">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M6 44c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Photo coming soon</span>
+          </div>
+          <div class="about-creds">
+            <div class="cred-item">
+              <strong>Experience</strong>
+              <p>Senior Client Success Executive, Big Leap (2021–2026). Prior: Boostability, DigiCert.</p>
+            </div>
+            <div class="cred-item">
+              <strong>Education</strong>
+              <p>MBA, Southern Utah University. B.S. Marketing, Utah Valley University.</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-copy-col reveal">
+          <p class="about-pull">6+ years as a fractional marketing lead across more industries than most marketers see in a full career.</p>
+          <div class="about-body">
+            <p>At Big Leap, I owned full-funnel performance across a rotating portfolio of growth-stage clients: men's health, HVAC, legal, SaaS, financial services, e-commerce, medtech, manufacturing, staffing, and more. Each one was a different demand model, a different conversion architecture, a different set of constraints.</p>
+            <p>That breadth is a specific kind of training. You develop pattern recognition across models, not just depth in one vertical. You learn to spot where a funnel breaks not because you've seen this exact business before, but because you've seen this exact failure mode in four other contexts.</p>
+            <p>I operate independently, make decisions with revenue consequences in mind rather than channel metrics, and build the process infrastructure that makes execution repeatable. Available for full-time roles and fractional engagements.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ──────────────────────────────────── -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <h2 class="contact-heading">Let's talk about what you're building.</h2>
+        <p class="contact-sub">Whether you need a full-time operator, a fractional lead, or a second opinion on a performance problem, reach out directly. I'd like to talk through how this maps to what you're working on.</p>
+      </div>
+      <div class="contact-links reveal" style="transition-delay:0.1s">
+        <a href="mailto:amcreager1812@gmail.com" class="contact-cta">
+          <span>amcreager1812@gmail.com</span>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/adamcreager" target="_blank" class="contact-link">
+          <span>LinkedIn</span>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="#" class="contact-link">
+          <span>Download resume</span>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Adam Creager</p>
+    <p>Performance Marketing · Demand Generation · Revenue Strategy</p>
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    }());
+  </script>
+
+</body>
+</html>

@@ -908,11 +908,61 @@
       nav { padding: 14px 24px; }
       .hero { padding: 64px 24px 72px; }
       .hero-headline { font-size: 38px; }
-.section { padding: 60px 24px; }
+      .section { padding: 60px 24px; }
       .signal-section { padding: 64px 24px; }
       .contact-section { padding: 60px 24px; }
-      .problems-grid { grid-template-columns: 1fr; }
       footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
+
+      /* ── Problem cards carousel ── */
+      .problems-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        margin: 0 -24px;
+        padding: 0 24px 16px;
+        scrollbar-width: none;
+      }
+      .problems-grid::-webkit-scrollbar { display: none; }
+      .problem-card {
+        flex-shrink: 0;
+        width: 78vw;
+        scroll-snap-align: start;
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        border-left: 3px solid transparent;
+      }
+      .problem-card:hover { border-left-color: var(--forest); }
+
+      /* ── Work items carousel ── */
+      .work-list {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 14px;
+        margin: 0 -24px;
+        padding: 0 24px 16px;
+        scrollbar-width: none;
+      }
+      .work-list::-webkit-scrollbar { display: none; }
+      .work-item {
+        flex-shrink: 0;
+        width: 85vw;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        grid-template-columns: unset;
+        border: 1px solid var(--rule);
+        border-top: 1px solid var(--rule);
+        border-radius: 8px;
+        padding: 22px 20px;
+        align-items: flex-start;
+      }
+      .work-item:last-child { border-bottom: 1px solid var(--rule); }
+      .work-outcome { align-self: stretch; }
     }
   </style>
 </head>

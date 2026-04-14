@@ -385,12 +385,13 @@
 
     /* ── WORK ─────────────────────────────────── */
     .work-section-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #b5b0a8;
-      margin-bottom: 16px;
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 24px;
     }
 
     .work-list { display: flex; flex-direction: column; }
@@ -914,9 +915,12 @@
       .contact-section { padding: 60px 24px; }
       footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
 
+      .work-section-label { font-size: 22px; }
+
       /* ── Problem cards carousel ── */
       .problems-grid {
         display: flex;
+        overflow: visible;
         overflow-x: auto;
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
@@ -1095,7 +1099,7 @@
         </div>
       </div>
 
-      <p class="work-section-label">Selected examples</p>
+      <h2 class="work-section-label">Selected examples</h2>
       <div class="work-list">
         <div class="work-item reveal">
           <div>

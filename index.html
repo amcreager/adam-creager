@@ -908,19 +908,18 @@
       .hero { padding: 64px 24px 72px; }
       .hero-headline { font-size: 38px; }
       .section { padding: 60px 24px; }
-      .signal-section { padding: 56px 24px; }
-      .signal-lede { margin-bottom: 32px; }
-      .signal-diagram {
-        height: auto;
-        overflow: visible;
-        margin: 0 -24px;
-        position: static;
-      }
+      /* signal: zero side padding so overflow:hidden doesn't clip the SVG */
+      .signal-section { padding: 56px 0; }
+      .signal-lede { padding: 0 24px; margin-bottom: 32px; }
+      .signal-diagram { height: auto; overflow: visible; margin: 0; position: static; }
       .signal-diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
       .contact-section { padding: 60px 24px; }
       footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
 
       .work-section-label { font-size: 22px; }
+
+      .problems-lede { margin-bottom: 20px; }
+      .industry-marquee { margin-top: 20px; padding-bottom: 16px; }
 
       /* ── Problem cards carousel ── */
       .problems-grid {
@@ -930,7 +929,7 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 0 -24px 56px;
+        margin: 20px -24px 56px;
         padding: 0 24px 16px;
         scrollbar-width: none;
       }
@@ -982,8 +981,6 @@
       }
       .work-item:last-child { border-bottom: 1px solid var(--rule); }
       .work-outcome { align-self: stretch; }
-
-      .industry-marquee { margin-top: 24px; padding-bottom: 16px; }
     }
   </style>
 </head>

@@ -918,7 +918,7 @@
       .problems-grid {
         display: flex;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
         margin: 0 -24px;
@@ -933,6 +933,10 @@
         border: 1px solid var(--rule);
         border-radius: 8px;
         border-left: 3px solid transparent;
+        /* visible immediately in carousel — IO can't reliably fire for off-screen horizontal items */
+        opacity: 1;
+        transform: none;
+        transition: none;
       }
       .problem-card:hover { border-left-color: var(--forest); }
 
@@ -940,7 +944,7 @@
       .work-list {
         display: flex;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 14px;
         margin: 0 -24px;
@@ -961,6 +965,10 @@
         border-radius: 8px;
         padding: 22px 20px;
         align-items: flex-start;
+        /* visible immediately in carousel — IO can't reliably fire for off-screen horizontal items */
+        opacity: 1;
+        transform: none;
+        transition: none;
       }
       .work-item:last-child { border-bottom: 1px solid var(--rule); }
       .work-outcome { align-self: stretch; }

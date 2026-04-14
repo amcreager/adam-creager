@@ -911,16 +911,12 @@
       .signal-section { padding: 56px 24px; }
       .signal-lede { margin-bottom: 32px; }
       .signal-diagram {
-        height: 240px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
+        height: auto;
+        overflow: visible;
         margin: 0 -24px;
-        scrollbar-width: none;
         position: static;
       }
-      .signal-diagram::-webkit-scrollbar { display: none; }
-      .signal-diagram svg { width: 900px; height: 240px; display: block; overflow: visible; }
+      .signal-diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
       .contact-section { padding: 60px 24px; }
       footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
 
@@ -1350,6 +1346,23 @@
         document.querySelector('.process-content[data-step="' + step + '"]').classList.add('active');
       });
     });
+
+    // Signal diagram: crop viewBox on mobile so pills + node fit without scrolling
+    (function () {
+      var diagramSvg = document.querySelector('.signal-diagram svg');
+      function setViewBox() {
+        if (!diagramSvg) return;
+        if (window.innerWidth <= 640) {
+          diagramSvg.setAttribute('viewBox', '0 0 480 240');
+          diagramSvg.setAttribute('preserveAspectRatio', 'xMinYMid meet');
+        } else {
+          diagramSvg.setAttribute('viewBox', '0 0 900 240');
+          diagramSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        }
+      }
+      setViewBox();
+      window.addEventListener('resize', setViewBox);
+    }());
 
     (function () {
       var els = document.querySelectorAll('.reveal');

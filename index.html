@@ -931,7 +931,7 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 8px -24px 56px;
+        margin: 0 -24px 56px;
         padding: 0 24px 16px;
         scrollbar-width: none;
       }
@@ -940,7 +940,7 @@
         flex-shrink: 0;
         width: 78vw;
         scroll-snap-align: start;
-        padding: 18px 16px;
+        padding: 16px 14px;
         border: 1px solid var(--rule);
         border-radius: 8px;
         border-left: 3px solid transparent;
@@ -1165,19 +1165,19 @@
               problem that silently drops gradients on horizontal <line> elements.
               Each gradient's x1/y1/x2/y2 matches its line's exact coordinates.
             -->
-            <linearGradient id="lg1" gradientUnits="userSpaceOnUse" x1="178" y1="19" x2="386" y2="107">
+            <linearGradient id="lg1" gradientUnits="userSpaceOnUse" x1="178" y1="19" x2="316" y2="107">
               <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.35"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.85"/>
             </linearGradient>
-            <linearGradient id="lg2" gradientUnits="userSpaceOnUse" x1="178" y1="120" x2="386" y2="120">
+            <linearGradient id="lg2" gradientUnits="userSpaceOnUse" x1="178" y1="120" x2="316" y2="120">
               <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.35"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.85"/>
             </linearGradient>
-            <linearGradient id="lg3" gradientUnits="userSpaceOnUse" x1="178" y1="221" x2="386" y2="133">
+            <linearGradient id="lg3" gradientUnits="userSpaceOnUse" x1="178" y1="221" x2="316" y2="133">
               <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.3"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.75"/>
             </linearGradient>
-            <linearGradient id="outGrad" gradientUnits="userSpaceOnUse" x1="454" y1="120" x2="700" y2="120">
+            <linearGradient id="outGrad" gradientUnits="userSpaceOnUse" x1="384" y1="120" x2="700" y2="120">
               <stop offset="0%" stop-color="#5DCAA5" stop-opacity="1"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.35"/>
             </linearGradient>
@@ -1193,25 +1193,25 @@
           <rect x="20" y="206" width="158" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
           <text x="99" y="225" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">REVENUE DATA</text>
 
-          <!-- FLOW LINES: pill right-edge → node ring edge (node cx=420 cy=120 r=34) -->
-          <line class="flow-line" x1="178" y1="19"  x2="386" y2="107" stroke="url(#lg1)" stroke-width="1.8"/>
-          <line class="flow-line" x1="178" y1="120" x2="386" y2="120" stroke="url(#lg2)" stroke-width="1.8" style="animation-delay:0.4s"/>
-          <line class="flow-line" x1="178" y1="221" x2="386" y2="133" stroke="url(#lg3)" stroke-width="1.8" style="animation-delay:0.8s"/>
+          <!-- FLOW LINES: pill right-edge → node ring left-edge (node cx=350 r=34 → left=316) -->
+          <line class="flow-line" x1="178" y1="19"  x2="316" y2="107" stroke="url(#lg1)" stroke-width="1.8"/>
+          <line class="flow-line" x1="178" y1="120" x2="316" y2="120" stroke="url(#lg2)" stroke-width="1.8" style="animation-delay:0.4s"/>
+          <line class="flow-line" x1="178" y1="221" x2="316" y2="133" stroke="url(#lg3)" stroke-width="1.8" style="animation-delay:0.8s"/>
 
-          <!-- NODE -->
+          <!-- NODE (cx=350 — centred in the left half so it fits on any phone width) -->
           <!-- Expanding pulse ring -->
-          <circle cx="420" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="1.2" class="pulse-ring"/>
+          <circle cx="350" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="1.2" class="pulse-ring"/>
           <!-- Outer soft halo -->
-          <circle cx="420" cy="120" r="50" fill="rgba(93,202,165,0.03)" stroke="rgba(93,202,165,0.07)" stroke-width="1"/>
+          <circle cx="350" cy="120" r="50" fill="rgba(93,202,165,0.03)" stroke="rgba(93,202,165,0.07)" stroke-width="1"/>
           <!-- Main ring -->
-          <circle cx="420" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="2.5" filter="url(#glow)" class="node-pulse"/>
+          <circle cx="350" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="2.5" filter="url(#glow)" class="node-pulse"/>
           <!-- Inner dot -->
-          <circle cx="420" cy="120" r="11" fill="#5DCAA5" filter="url(#glow)"/>
+          <circle cx="350" cy="120" r="11" fill="#5DCAA5" filter="url(#glow)"/>
           <!-- Dark center -->
-          <circle cx="420" cy="120" r="5" fill="#0A1F1C"/>
+          <circle cx="350" cy="120" r="5" fill="#0A1F1C"/>
 
           <!-- OUTPUT LINE + TERMINAL -->
-          <line x1="454" y1="120" x2="700" y2="120" stroke="url(#outGrad)" stroke-width="2.5" stroke-linecap="round" class="output-glow"/>
+          <line x1="384" y1="120" x2="700" y2="120" stroke="url(#outGrad)" stroke-width="2.5" stroke-linecap="round" class="output-glow"/>
           <circle cx="708" cy="120" r="8" fill="#5DCAA5" filter="url(#glow)" class="output-glow"/>
           <!-- Short connector: terminal dot right-edge → output label left-edge -->
           <line x1="716" y1="120" x2="730" y2="120" stroke="#5DCAA5" stroke-width="1.5" stroke-opacity="0.4"/>
@@ -1353,7 +1353,7 @@
       function setViewBox() {
         if (!diagramSvg) return;
         if (window.innerWidth <= 640) {
-          diagramSvg.setAttribute('viewBox', '0 0 560 240');
+          diagramSvg.setAttribute('viewBox', '0 0 500 240');
           diagramSvg.setAttribute('preserveAspectRatio', 'xMinYMid meet');
         } else {
           diagramSvg.setAttribute('viewBox', '0 0 900 240');

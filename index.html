@@ -911,8 +911,10 @@
       /* signal: zero side padding so overflow:hidden doesn't clip the SVG */
       .signal-section { padding: 56px 0; }
       .signal-lede { padding: 0 24px; margin-bottom: 32px; }
-      .signal-diagram { height: auto; overflow: visible; margin: 0; position: static; }
-      .signal-diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
+      .signal-diagram { height: auto; overflow: hidden; margin: 0; position: static; }
+      /* overflow:hidden clips pulse-ring animation within viewBox so it can't bleed
+         past .signal-section's overflow:hidden and make the node look cut off */
+      .signal-diagram svg { width: 100%; height: auto; display: block; overflow: hidden; }
       .contact-section { padding: 60px 24px; }
       footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
 
@@ -929,7 +931,7 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 20px -24px 56px;
+        margin: 8px -24px 56px;
         padding: 0 24px 16px;
         scrollbar-width: none;
       }
@@ -938,6 +940,7 @@
         flex-shrink: 0;
         width: 78vw;
         scroll-snap-align: start;
+        padding: 18px 16px;
         border: 1px solid var(--rule);
         border-radius: 8px;
         border-left: 3px solid transparent;
@@ -1350,7 +1353,7 @@
       function setViewBox() {
         if (!diagramSvg) return;
         if (window.innerWidth <= 640) {
-          diagramSvg.setAttribute('viewBox', '0 0 480 240');
+          diagramSvg.setAttribute('viewBox', '0 0 560 240');
           diagramSvg.setAttribute('preserveAspectRatio', 'xMinYMid meet');
         } else {
           diagramSvg.setAttribute('viewBox', '0 0 900 240');

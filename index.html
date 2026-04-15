@@ -1007,9 +1007,9 @@
       .work-section-label { font-size: 22px; }
 
       .problems-lede { margin-bottom: 20px; }
-      /* padding-bottom reset to 0 so separator sits flush under marquee text;
-         margin-top on .problems-grid (40px below) sets the gap from the line */
-      .industry-marquee { margin-top: 20px; padding-bottom: 0; }
+      /* Remove the border separator on mobile — the gap is measured purely
+         from the margin on .problems-grid, giving a clean equal gap on both sides */
+      .industry-marquee { margin-top: 20px; padding-bottom: 0; border-bottom: none; }
 
       /* ── Problem cards carousel ── */
       .problems-grid {

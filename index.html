@@ -335,6 +335,7 @@
       border: 1px solid var(--rule);
       border-radius: 10px;
       overflow: hidden;
+      margin-top: 72px;
       margin-bottom: 72px;
     }
 
@@ -909,7 +910,9 @@
       .hero-headline { font-size: 38px; }
       .section { padding: 60px 24px; }
       /* signal: zero side padding so diagram can scroll edge-to-edge */
-      .signal-section { padding: 56px 0; }
+      /* overflow:clip clips visually but does NOT create a scroll container,
+         so the child .signal-diagram scroll container can work freely */
+      .signal-section { padding: 56px 0; overflow: clip; }
       .signal-lede { padding: 0 24px; margin-bottom: 24px; }
       .signal-diagram {
         overflow-x: auto;

@@ -923,7 +923,7 @@
         position: static;
       }
       .signal-diagram::-webkit-scrollbar { display: none; }
-      .signal-diagram svg { width: 900px; height: 240px; display: block; overflow: visible; }
+      .signal-diagram svg { width: 700px; height: 240px; display: block; overflow: visible; }
       /* Fade on right edge hints that the diagram scrolls */
       .signal-lede ~ .signal-diagram { position: relative; }
       .signal-inner::after {
@@ -953,7 +953,7 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 24px -24px 40px;
+        margin: 40px -24px 40px;
         padding: 0 24px;
         scrollbar-width: none;
       }
@@ -1176,7 +1176,7 @@
       </div>
 
       <div class="signal-diagram">
-        <svg viewBox="0 0 900 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 700 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="3.5" result="blur"/>
@@ -1187,61 +1187,61 @@
               problem that silently drops gradients on horizontal <line> elements.
               Each gradient's x1/y1/x2/y2 matches its line's exact coordinates.
             -->
-            <linearGradient id="lg1" gradientUnits="userSpaceOnUse" x1="178" y1="19" x2="316" y2="107">
+            <linearGradient id="lg1" gradientUnits="userSpaceOnUse" x1="142" y1="19" x2="246" y2="107">
               <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.35"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.85"/>
             </linearGradient>
-            <linearGradient id="lg2" gradientUnits="userSpaceOnUse" x1="178" y1="120" x2="316" y2="120">
+            <linearGradient id="lg2" gradientUnits="userSpaceOnUse" x1="142" y1="120" x2="246" y2="120">
               <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.35"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.85"/>
             </linearGradient>
-            <linearGradient id="lg3" gradientUnits="userSpaceOnUse" x1="178" y1="221" x2="316" y2="133">
+            <linearGradient id="lg3" gradientUnits="userSpaceOnUse" x1="142" y1="221" x2="246" y2="133">
               <stop offset="0%" stop-color="#2E7D6E" stop-opacity="0.3"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.75"/>
             </linearGradient>
-            <linearGradient id="outGrad" gradientUnits="userSpaceOnUse" x1="384" y1="120" x2="700" y2="120">
+            <linearGradient id="outGrad" gradientUnits="userSpaceOnUse" x1="314" y1="120" x2="490" y2="120">
               <stop offset="0%" stop-color="#5DCAA5" stop-opacity="1"/>
               <stop offset="100%" stop-color="#5DCAA5" stop-opacity="0.35"/>
             </linearGradient>
           </defs>
 
           <!-- INPUT PILLS -->
-          <rect x="20" y="4" width="158" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
-          <text x="99" y="23" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">DIGITAL MARKETING</text>
+          <rect x="16" y="4" width="126" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
+          <text x="79" y="23" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">DIGITAL MARKETING</text>
 
-          <rect x="20" y="105" width="158" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
-          <text x="99" y="124" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">PIPELINE ACTIVITY</text>
+          <rect x="16" y="105" width="126" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
+          <text x="79" y="124" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">PIPELINE ACTIVITY</text>
 
-          <rect x="20" y="206" width="158" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
-          <text x="99" y="225" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">REVENUE DATA</text>
+          <rect x="16" y="206" width="126" height="30" rx="5" fill="rgba(15,110,86,0.12)" stroke="rgba(93,202,165,0.18)" stroke-width="1"/>
+          <text x="79" y="225" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" fill="#7AB5A8" letter-spacing="0.08em">REVENUE DATA</text>
 
-          <!-- FLOW LINES: pill right-edge → node ring left-edge (node cx=350 r=34 → left=316) -->
-          <line class="flow-line" x1="178" y1="19"  x2="316" y2="107" stroke="url(#lg1)" stroke-width="1.8"/>
-          <line class="flow-line" x1="178" y1="120" x2="316" y2="120" stroke="url(#lg2)" stroke-width="1.8" style="animation-delay:0.4s"/>
-          <line class="flow-line" x1="178" y1="221" x2="316" y2="133" stroke="url(#lg3)" stroke-width="1.8" style="animation-delay:0.8s"/>
+          <!-- FLOW LINES: pill right-edge → node ring left-edge (node cx=280 r=34 → left=246) -->
+          <line class="flow-line" x1="142" y1="19"  x2="246" y2="107" stroke="url(#lg1)" stroke-width="1.8"/>
+          <line class="flow-line" x1="142" y1="120" x2="246" y2="120" stroke="url(#lg2)" stroke-width="1.8" style="animation-delay:0.4s"/>
+          <line class="flow-line" x1="142" y1="221" x2="246" y2="133" stroke="url(#lg3)" stroke-width="1.8" style="animation-delay:0.8s"/>
 
-          <!-- NODE (cx=350 — centred in the left half so it fits on any phone width) -->
+          <!-- NODE -->
           <!-- Expanding pulse ring -->
-          <circle cx="350" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="1.2" class="pulse-ring"/>
+          <circle cx="280" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="1.2" class="pulse-ring"/>
           <!-- Outer soft halo -->
-          <circle cx="350" cy="120" r="50" fill="rgba(93,202,165,0.03)" stroke="rgba(93,202,165,0.07)" stroke-width="1"/>
+          <circle cx="280" cy="120" r="50" fill="rgba(93,202,165,0.03)" stroke="rgba(93,202,165,0.07)" stroke-width="1"/>
           <!-- Main ring -->
-          <circle cx="350" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="2.5" filter="url(#glow)" class="node-pulse"/>
+          <circle cx="280" cy="120" r="34" fill="none" stroke="#5DCAA5" stroke-width="2.5" filter="url(#glow)" class="node-pulse"/>
           <!-- Inner dot -->
-          <circle cx="350" cy="120" r="11" fill="#5DCAA5" filter="url(#glow)"/>
+          <circle cx="280" cy="120" r="11" fill="#5DCAA5" filter="url(#glow)"/>
           <!-- Dark center -->
-          <circle cx="350" cy="120" r="5" fill="#0A1F1C"/>
+          <circle cx="280" cy="120" r="5" fill="#0A1F1C"/>
 
           <!-- OUTPUT LINE + TERMINAL -->
-          <line x1="384" y1="120" x2="700" y2="120" stroke="url(#outGrad)" stroke-width="2.5" stroke-linecap="round" class="output-glow"/>
-          <circle cx="708" cy="120" r="8" fill="#5DCAA5" filter="url(#glow)" class="output-glow"/>
+          <line x1="314" y1="120" x2="490" y2="120" stroke="url(#outGrad)" stroke-width="2.5" stroke-linecap="round" class="output-glow"/>
+          <circle cx="498" cy="120" r="8" fill="#5DCAA5" filter="url(#glow)" class="output-glow"/>
           <!-- Short connector: terminal dot right-edge → output label left-edge -->
-          <line x1="716" y1="120" x2="730" y2="120" stroke="#5DCAA5" stroke-width="1.5" stroke-opacity="0.4"/>
+          <line x1="506" y1="120" x2="520" y2="120" stroke="#5DCAA5" stroke-width="1.5" stroke-opacity="0.4"/>
 
           <!-- OUTPUT LABEL -->
-          <rect x="730" y="90" width="152" height="60" rx="8" fill="rgba(93,202,165,0.07)" stroke="rgba(93,202,165,0.28)" stroke-width="1.5"/>
-          <text x="806" y="116" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600" fill="#5DCAA5" letter-spacing="0.08em">REVENUE</text>
-          <text x="806" y="134" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600" fill="#5DCAA5" letter-spacing="0.08em">DECISION</text>
+          <rect x="520" y="90" width="152" height="60" rx="8" fill="rgba(93,202,165,0.07)" stroke="rgba(93,202,165,0.28)" stroke-width="1.5"/>
+          <text x="596" y="116" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600" fill="#5DCAA5" letter-spacing="0.08em">REVENUE</text>
+          <text x="596" y="134" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="600" fill="#5DCAA5" letter-spacing="0.08em">DECISION</text>
         </svg>
       </div>
     </div>
@@ -1387,17 +1387,6 @@
       els.forEach(function (el) { io.observe(el); });
     }());
 
-    // Diagram: start mid-scroll so partial content is visible on both sides,
-    // making it obvious the diagram is a scrollable carousel (peek pattern).
-    // requestAnimationFrame ensures the scroll container is painted before
-    // scrollLeft is set — iOS Safari ignores scrollLeft set before first paint.
-    (function () {
-      var diag = document.querySelector('.signal-diagram');
-      if (!diag || window.innerWidth > 640) return;
-      requestAnimationFrame(function () {
-        diag.scrollLeft = Math.round((900 - window.innerWidth) / 2);
-      });
-    }());
   </script>
 
   <!-- Vercel Analytics & Speed Insights -->

@@ -335,7 +335,7 @@
       border: 1px solid var(--rule);
       border-radius: 10px;
       overflow: hidden;
-      margin-top: 48px;
+      margin-top: 72px;
       margin-bottom: 72px;
     }
 
@@ -918,16 +918,26 @@
         overflow-x: scroll;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(93,202,165,0.35) transparent;
+        scrollbar-width: none;
         height: 240px;
         margin: 0;
         position: static;
       }
-      .signal-diagram::-webkit-scrollbar { height: 4px; }
-      .signal-diagram::-webkit-scrollbar-track { background: transparent; }
-      .signal-diagram::-webkit-scrollbar-thumb { background: rgba(93,202,165,0.35); border-radius: 2px; }
+      .signal-diagram::-webkit-scrollbar { display: none; }
       .signal-diagram svg { width: 900px; height: 240px; display: block; overflow: visible; }
+      /* Fade on right edge hints that the diagram scrolls */
+      .signal-lede ~ .signal-diagram { position: relative; }
+      .signal-inner::after {
+        content: '';
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        right: 0;
+        width: 56px;
+        height: 240px;
+        background: linear-gradient(to right, transparent, var(--deep-teal));
+        pointer-events: none;
+      }
       .contact-section { padding: 60px 24px; }
       footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
 
@@ -944,8 +954,8 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 24px -24px 24px;
-        padding: 0 24px 16px;
+        margin: 40px -24px 40px;
+        padding: 0 24px;
         scrollbar-width: none;
       }
       .problems-grid::-webkit-scrollbar { display: none; }

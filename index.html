@@ -511,6 +511,8 @@
 
     .signal-diagram { width: 100%; height: 280px; position: relative; }
     .signal-diagram svg { width: 100%; height: 100%; overflow: visible; }
+    /* Mobile CSS diagram — hidden at desktop, shown at ≤640px */
+    .signal-flow-mobile { display: none; }
 
     @keyframes nodePulse {
       0%, 100% { r: 28; opacity: 1; }
@@ -909,28 +911,105 @@
       .hero { padding: 64px 24px 72px; }
       .hero-headline { font-size: 38px; }
       .section { padding: 60px 24px; }
-      /* signal: overflow:visible lets the child scroll container work freely.
-         overflow:hidden/clip can block touch-scroll on iOS Safari. Nothing
-         in this section actually overflows visually so visible is safe. */
-      .signal-section { padding: 56px 0; overflow: visible; }
+      .signal-section { padding: 56px 0; }
       .signal-lede { padding: 0 24px; margin-bottom: 24px; }
-      .signal-diagram {
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        height: 240px;
-        margin: 0;
-        position: static;
+      /* Hide SVG on mobile; show CSS layout instead */
+      .signal-diagram { height: auto; }
+      .signal-diagram > svg { display: none; }
+      .signal-flow-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 24px;
       }
-      .signal-diagram::-webkit-scrollbar { display: none; }
-      .signal-diagram svg { width: 580px; height: 240px; display: block; overflow: visible; }
+      .sfm-inputs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+      .sfm-pill {
+        padding: 6px 14px;
+        background: rgba(15,110,86,0.12);
+        border: 1px solid rgba(93,202,165,0.18);
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #7AB5A8;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .sfm-connector {
+        width: 2px;
+        height: 28px;
+        background: linear-gradient(to bottom, rgba(93,202,165,0.7), rgba(93,202,165,0.25));
+      }
+      .sfm-node {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        border: 2.5px solid #5DCAA5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        animation: sfmPulse 2.8s ease-in-out infinite;
+      }
+      .sfm-node::before {
+        content: '';
+        position: absolute;
+        inset: -10px;
+        border-radius: 50%;
+        border: 1px solid rgba(93,202,165,0.22);
+        animation: sfmRing 2.8s ease-out infinite;
+      }
+      .sfm-dot {
+        width: 22px;
+        height: 22px;
+        background: #5DCAA5;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(93,202,165,0.5);
+        position: relative;
+      }
+      .sfm-dot::after {
+        content: '';
+        position: absolute;
+        inset: 7px;
+        background: #0A1F1C;
+        border-radius: 50%;
+      }
+      .sfm-output {
+        padding: 14px 28px;
+        border: 1.5px solid rgba(93,202,165,0.28);
+        border-radius: 8px;
+        background: rgba(93,202,165,0.07);
+        font-size: 11px;
+        font-weight: 600;
+        color: #5DCAA5;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+      @keyframes sfmPulse {
+        0%, 100% { box-shadow: 0 0 16px rgba(93,202,165,0.15); }
+        50%       { box-shadow: 0 0 28px rgba(93,202,165,0.35); }
+      }
+      @keyframes sfmRing {
+        0%   { transform: scale(1); opacity: 0.4; }
+        100% { transform: scale(1.65); opacity: 0; }
+      }
       .contact-section { padding: 60px 24px; }
       footer { padding: 16px 24px; flex-direction: column; gap: 4px; text-align: center; }
 
       .work-section-label { font-size: 22px; }
 
       .problems-lede { margin-bottom: 20px; }
-      .industry-marquee { margin-top: 20px; padding-bottom: 16px; }
+      /* padding-bottom reset to 0 so separator sits flush under marquee text;
+         margin-top on .problems-grid (40px below) sets the gap from the line */
+      .industry-marquee { margin-top: 20px; padding-bottom: 0; }
 
       /* ── Problem cards carousel ── */
       .problems-grid {
@@ -940,7 +1019,7 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 24px -24px 40px;
+        margin: 40px -24px 40px;
         padding: 0 24px;
         scrollbar-width: none;
       }
@@ -1163,6 +1242,21 @@
       </div>
 
       <div class="signal-diagram">
+
+        <!-- CSS-based layout shown on mobile (≤640px) -->
+        <div class="signal-flow-mobile">
+          <div class="sfm-inputs">
+            <span class="sfm-pill">Digital Marketing</span>
+            <span class="sfm-pill">Pipeline Activity</span>
+            <span class="sfm-pill">Revenue Data</span>
+          </div>
+          <div class="sfm-connector"></div>
+          <div class="sfm-node"><span class="sfm-dot"></span></div>
+          <div class="sfm-connector"></div>
+          <div class="sfm-output">Revenue Decision</div>
+        </div>
+
+        <!-- SVG diagram shown on desktop (>640px) -->
         <svg viewBox="0 0 580 240" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -1374,18 +1468,6 @@
       els.forEach(function (el) { io.observe(el); });
     }());
 
-    // Diagram scroll: position so REVENUE DECISION box is visible on the right.
-    // SVG is 580px wide; on phones narrower than that, scroll right-align so
-    // the node (cx=260) + output line + Revenue box are all in view.
-    // On viewports ≥580px the full diagram fits and scrollLeft stays 0.
-    // requestAnimationFrame: iOS Safari ignores scrollLeft set before first paint.
-    (function () {
-      var diag = document.querySelector('.signal-diagram');
-      if (!diag || window.innerWidth > 640) return;
-      requestAnimationFrame(function () {
-        diag.scrollLeft = Math.max(0, 580 - window.innerWidth);
-      });
-    }());
   </script>
 
   <!-- Vercel Analytics & Speed Insights -->

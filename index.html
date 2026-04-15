@@ -909,10 +909,10 @@
       .hero { padding: 64px 24px 72px; }
       .hero-headline { font-size: 38px; }
       .section { padding: 60px 24px; }
-      /* signal: zero side padding so diagram can scroll edge-to-edge */
-      /* overflow:clip clips visually but does NOT create a scroll container,
-         so the child .signal-diagram scroll container can work freely */
-      .signal-section { padding: 56px 0; overflow: clip; }
+      /* signal: overflow:visible lets the child scroll container work freely.
+         overflow:hidden/clip can block touch-scroll on iOS Safari. Nothing
+         in this section actually overflows visually so visible is safe. */
+      .signal-section { padding: 56px 0; overflow: visible; }
       .signal-lede { padding: 0 24px; margin-bottom: 24px; }
       .signal-diagram {
         overflow-x: auto;
@@ -941,7 +941,7 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 40px -24px 40px;
+        margin: 40px -24px 24px;
         padding: 0 24px 16px;
         scrollbar-width: none;
       }

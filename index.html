@@ -1027,7 +1027,7 @@
         margin-left: -24px;
         padding: 0 24px;
         scrollbar-width: none;
-        /* remove outer frame; gap background still shows between cards */
+        background: transparent;
         border: none;
         border-radius: 0;
       }
@@ -1039,7 +1039,6 @@
         padding: 16px 14px;
         border: 1px solid var(--rule);
         border-radius: 8px;
-        border-left: 3px solid transparent;
         /* visible immediately in carousel — IO can't reliably fire for off-screen horizontal items */
         opacity: 1;
         transform: none;

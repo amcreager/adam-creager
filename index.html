@@ -335,7 +335,7 @@
       border: 1px solid var(--rule);
       border-radius: 10px;
       overflow: hidden;
-      margin-top: 72px;
+      margin-top: 48px;
       margin-bottom: 72px;
     }
 
@@ -954,7 +954,7 @@
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
         gap: 12px;
-        margin: 40px -24px 40px;
+        margin: 24px -24px 40px;
         padding: 0 24px;
         scrollbar-width: none;
       }
@@ -1386,6 +1386,15 @@
         });
       }, { threshold: 0.12 });
       els.forEach(function (el) { io.observe(el); });
+    }());
+
+    // Diagram: start mid-scroll so partial content is visible on both sides,
+    // making it obvious the diagram is a scrollable carousel (peek pattern).
+    (function () {
+      var diag = document.querySelector('.signal-diagram');
+      if (!diag || window.innerWidth > 640) return;
+      // Center the 900px SVG in the viewport so ~(900-vw)/2 px are hidden on each side
+      diag.scrollLeft = Math.round((900 - window.innerWidth) / 2);
     }());
   </script>
 

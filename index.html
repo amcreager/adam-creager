@@ -915,8 +915,7 @@
       .signal-section { padding: 56px 0; overflow: visible; }
       .signal-lede { padding: 0 24px; margin-bottom: 24px; }
       .signal-diagram {
-        overflow-x: scroll;
-        overflow-y: hidden;
+        overflow: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         height: 240px;
@@ -1390,11 +1389,14 @@
 
     // Diagram: start mid-scroll so partial content is visible on both sides,
     // making it obvious the diagram is a scrollable carousel (peek pattern).
+    // requestAnimationFrame ensures the scroll container is painted before
+    // scrollLeft is set — iOS Safari ignores scrollLeft set before first paint.
     (function () {
       var diag = document.querySelector('.signal-diagram');
       if (!diag || window.innerWidth > 640) return;
-      // Center the 900px SVG in the viewport so ~(900-vw)/2 px are hidden on each side
-      diag.scrollLeft = Math.round((900 - window.innerWidth) / 2);
+      requestAnimationFrame(function () {
+        diag.scrollLeft = Math.round((900 - window.innerWidth) / 2);
+      });
     }());
   </script>
 

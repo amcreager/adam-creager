@@ -464,6 +464,169 @@
     }
 
 
+    /* ── TESTIMONIALS ────────────────────────── */
+    .testimonials-section {
+      padding: 88px 48px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper-alt);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative large quote mark */
+    .testimonials-section::before {
+      content: '\201C';
+      position: absolute;
+      top: 40px;
+      right: 5%;
+      font-family: var(--serif);
+      font-size: 260px;
+      line-height: 1;
+      color: rgba(93,202,165,0.12);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .testimonials-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Eyebrow label — matches work-section-label pattern */
+    .testimonials-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b5b0a8;
+      margin-bottom: 16px;
+    }
+
+    .testimonials-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+      max-width: 520px;
+    }
+
+    .testimonials-heading em {
+      font-style: italic;
+      color: #9a9590;
+    }
+
+    /* Three-column grid, 2px gap creates thin dark separator effect */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 40px;
+    }
+
+    /* Dark card — consistent with .work-outcome boxes */
+    .quote-block {
+      background: var(--deep-teal);
+      padding: 36px 32px 32px;
+      border-left: 3px solid var(--signal);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .quote-text {
+      font-family: var(--serif);
+      font-size: clamp(15px, 1.5vw, 17px);
+      line-height: 1.65;
+      color: var(--off-white);
+      font-style: italic;
+      flex: 1;
+    }
+
+    .quote-attribution {
+      border-top: 1px solid var(--rule-light);
+      padding-top: 18px;
+    }
+
+    .quote-name {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--off-white);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .quote-name:hover { color: var(--signal); }
+
+    .quote-role {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted-teal);
+      line-height: 1.4;
+      font-weight: 300;
+    }
+
+    /* CTA link — text link style, consistent with site's restrained CTA */
+    .testimonials-footer {
+      display: flex;
+      align-items: center;
+    }
+
+    .testimonials-link {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #7a7570;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .testimonials-link:hover {
+      color: var(--forest);
+      border-color: var(--forest);
+    }
+
+    .testimonials-link-arrow {
+      font-size: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .testimonials-link:hover .testimonials-link-arrow {
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 768px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+      .testimonials-section::before { display: none; }
+      .testimonials-heading { font-size: 28px; margin-bottom: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .testimonials-section { padding: 72px 20px; }
+      .quote-block { padding: 28px 24px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .testimonials-section::before { display: none; }
+    }
+
     /* ── SIGNAL FLOW ──────────────────────────── */
     .signal-section {
       background: var(--deep-teal);
@@ -1237,6 +1400,65 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ──────────────────────────── -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="testimonials-inner">
+
+      <p class="testimonials-eyebrow">Client Perspectives</p>
+
+      <h2 class="testimonials-heading">
+        Results, <em>in their own words.</em>
+      </h2>
+
+      <div class="testimonials-grid">
+
+        <div class="quote-block reveal">
+          <p class="quote-text">
+            "Top notch, experienced, and can keep the worst type of client happy: a strapped startup. Our ambition overreached our budget, but not Adam's technical expertise and marketing experience."
+          </p>
+          <div class="quote-attribution">
+            <a href="https://www.linkedin.com/in/robertkwalz/" target="_blank" rel="noopener noreferrer" class="quote-name">Robert Walz</a>
+            <p class="quote-role">Content Marketing Director, Administrate</p>
+          </div>
+        </div>
+
+        <div class="quote-block reveal" style="transition-delay:0.1s">
+          <p class="quote-text">
+            "His adaptability and steady approach have brought calm to the chaos. He has continually helped us meet deadlines and ensured we had the support we needed to succeed."
+          </p>
+          <div class="quote-attribution">
+            <a href="https://www.linkedin.com/in/hannahbethcraft/" target="_blank" rel="noopener noreferrer" class="quote-name">Hannah Craft</a>
+            <p class="quote-role">VP of Marketing, MedShiftRx</p>
+          </div>
+        </div>
+
+        <div class="quote-block reveal" style="transition-delay:0.2s">
+          <p class="quote-text">
+            "He consistently brought fresh ideas to the table. This helped us improve our Meta campaigns with sharper targeting, higher-quality leads, and stronger engagement."
+          </p>
+          <div class="quote-attribution">
+            <a href="https://www.linkedin.com/in/vbranco/" target="_blank" rel="noopener noreferrer" class="quote-name">Vanessa M. Branco</a>
+            <p class="quote-role">Chief Sales & Marketing Officer, Sunbolt</p>
+          </div>
+        </div>
+
+      </div><!-- /testimonials-grid -->
+
+      <div class="testimonials-footer">
+        <a
+          href="https://www.linkedin.com/in/adam-creager/details/recommendations/?detailScreenTabIndex=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="testimonials-link"
+        >
+          View all recommendations on LinkedIn
+          <span class="testimonials-link-arrow">→</span>
+        </a>
+      </div>
+
     </div>
   </section>
 
